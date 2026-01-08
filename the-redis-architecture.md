@@ -1,5 +1,7 @@
 
-# Redis: Memory-First, Fast Recovery
+# The Redis Architecture: Memory-first persistence models, supported data structures, and distributed caching roles. 
+
+---
 
 ## 1) What Redis Is For
 - High-speed layer for APIs, rate limits, sessions, queues/streams, leaderboards.

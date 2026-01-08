@@ -2,6 +2,9 @@ import { Router } from 'express';
 import { cacheMiddleware } from '../middlewares/cacheMiddleware.js';
 import { rateLimiter } from '../middlewares/rateLimiter.js';
 import { getJokeController } from '../controllers/jokeController.js';
+import { createRequire } from 'module';
+
+const require = createRequire(import.meta.url);
 
 const router = Router();
 
