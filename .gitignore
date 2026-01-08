@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+
+# Env and secrets
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage
+coverage/
+
+# Build outputs
+build/
+dist/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Cache
+.cache/
+
+# Misc
+*.pid
+*.seed
