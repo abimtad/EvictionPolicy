@@ -14,6 +14,7 @@ yarn-error.log*
 
 # Coverage
 coverage/
+the-reds-architecture.md
 
 # Build outputs
 build/
