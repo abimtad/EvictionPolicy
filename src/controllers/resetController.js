@@ -5,16 +5,32 @@ import { connectRedis, redisClient } from '../config/redisClient.js';
 async function clearRateLimitKeys() {
   try {
     await connectRedis();
-    const stream = redisClient.scanIterator({ MATCH: 'rl:*', COUNT: 100 });
-    const keys = [];
-    for await (const key of stream) {
-      keys.push(key);
-      if (keys.length >= 100) {
-        await redisClient.del(keys);
-        keys.length = 0;
+    const match = 'rl:*';
+    const batch = 100;
+
+    if (typeof redisClient.scanIterator === 'function') {
+      // node-redis iterator API
+      const stream = redisClient.scanIterator({ MATCH: match, COUNT: batch });
+      const keys = [];
+      for await (const key of stream) {
+        keys.push(key);
+        if (keys.length >= batch) {
+          await redisClient.del(...keys);
+          keys.length = 0;
+        }
       }
+      if (keys.length) await redisClient.del(...keys);
+    } else if (typeof redisClient.scan === 'function') {
+      // Upstash or generic SCAN loop
+      let cursor = 0;
+      do {
+        const [nextCursor, keys] = await redisClient.scan(cursor, { match, count: batch });
+        if (keys && keys.length) {
+          await redisClient.del(...keys);
+        }
+        cursor = Number(nextCursor);
+      } while (cursor !== 0);
     }
-    if (keys.length) await redisClient.del(keys);
   } catch (err) {
     console.error('Unable to clear rate limit keys', err.message);
   }

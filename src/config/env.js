@@ -6,6 +6,10 @@ export const env = {
   port: process.env.PORT || 3000,
   mongoUri: process.env.MONGO_URI,
   redisUrl: process.env.REDIS_URL || 'redis://localhost:6379',
+  upstash: {
+    restUrl: process.env.UPSTASH_REDIS_REST_URL,
+    restToken: process.env.UPSTASH_REDIS_REST_TOKEN
+  },
   rateLimit: {
     windowSeconds: Number(process.env.RATE_LIMIT_WINDOW_SECONDS || 60),
     maxRequests: Number(process.env.RATE_LIMIT_MAX_REQUESTS || 5)
