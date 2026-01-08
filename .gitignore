@@ -2,8 +2,6 @@
 node_modules/
 
 # Env and secrets
-.env
-.env.*
 
 # Logs
 logs/
@@ -23,7 +21,6 @@ dist/
 # OS / editor files
 .DS_Store
 Thumbs.db
-.vscode/
 
 # Cache
 .cache/
@@ -31,3 +28,7 @@ Thumbs.db
 # Misc
 *.pid
 *.seed
+branch_structure.json
+temp_auto_push.bat
+temp_interactive_push.bat
+config.bat
